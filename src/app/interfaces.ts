@@ -1,0 +1,3 @@
+interface SignupStageProps {
+  goToNextStage: () => void;
+}
