@@ -45,7 +45,7 @@ export default function ConfirmPassword(props: ConfirmPasswordProps) {
         <Input
           value={confirmPassword}
           updateValue={setConfirmPassword}
-          placeholder="Confirm password"
+          label="Confirm password"
           error={showConfirmPasswordError && "Passwords do not match"}
           password={true}
         />
@@ -54,7 +54,7 @@ export default function ConfirmPassword(props: ConfirmPasswordProps) {
             <Input
               value={confirmPasswordAgain}
               updateValue={setConfirmPasswordAgain}
-              placeholder="Confirm password again"
+              label="Confirm password again"
               error={showConfirmPasswordErrorAgain && "Passwords do not match"}
               password={true}
             />
@@ -62,7 +62,7 @@ export default function ConfirmPassword(props: ConfirmPasswordProps) {
               <Input
                 value={confirmPasswordLastTime}
                 updateValue={setConfirmPasswordLastTime}
-                placeholder="Maximally confirm password"
+                label="Maximally confirm password"
                 error={
                   showConfirmPasswordErrorLastTime && "Passwords do not match"
                 }

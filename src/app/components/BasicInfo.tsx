@@ -48,23 +48,26 @@ export default function BasicInfo(props: BasicInfoProps) {
         <Input
           value={firstName}
           updateValue={setFirstName}
-          placeholder="First name"
+          label="First name"
+          placeholder="Alex"
         />
         <Input
           value={lastName}
           updateValue={setLastName}
-          placeholder="Last name"
+          label="Last name"
+          placeholder="Jones"
         />
         <Input
           value={email}
           updateValue={setEmail}
-          placeholder="Email"
+          label="Email"
           error={showEmailError && "Must be a valid email address"}
+          placeholder="alex.jones@gmail.com"
         />
         <Input
           value={password}
           updateValue={setPassword}
-          placeholder="Password"
+          label="Password"
           error={showPasswordError && "Must be >6 characters"}
           password={true}
         />
@@ -72,7 +75,7 @@ export default function BasicInfo(props: BasicInfoProps) {
           <Input
             value={confirmPassword}
             updateValue={setConfirmPassword}
-            placeholder="Confirm password"
+            label="Confirm password"
             error={showConfirmPasswordError && "Passwords do not match"}
             password={true}
           />
