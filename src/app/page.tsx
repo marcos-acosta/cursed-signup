@@ -12,9 +12,13 @@ const enum SignupStage {
   ABOUT_YOU = 3,
 }
 
+const STARTING_PAGE =
+  process.env.NODE_ENV === "development"
+    ? SignupStage.ABOUT_YOU
+    : SignupStage.BASIC_INFO;
+
 export default function Home() {
-  // const [signupStage, setSignupStage] = useState(SignupStage.BASIC_INFO);
-  const [signupStage, setSignupStage] = useState(SignupStage.ABOUT_YOU);
+  const [signupStage, setSignupStage] = useState(STARTING_PAGE);
   const [password, setPassword] = useState("");
 
   const nextSignupStage = () => {

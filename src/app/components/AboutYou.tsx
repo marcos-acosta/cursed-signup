@@ -30,9 +30,8 @@ export default function AboutYou(props: AboutYouProps) {
   return (
     <div>
       <div className={styles.titleContainer}>
-        <h1>Create an account</h1>
-        Nothing you type here gets sent to a server. This signup page exists
-        solely for your amusement.
+        <h1>Just a few more questions</h1>
+        Let&apos;s get to know you!
       </div>
       <div className={styles.formContainer}>
         <Input
