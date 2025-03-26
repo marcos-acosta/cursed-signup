@@ -2,26 +2,40 @@ import React, { useState } from "react";
 import Input from "./Input";
 import styles from "./styles.module.css";
 import Button from "./Button";
-import { isValidHex, isValidMbti } from "../util";
-import SideBySide from "./SideBySide";
+import { isValidHex, isValidMbti, isValidNumber } from "../util";
 import ColorSwatch from "./ColorSwatch";
+import Dropdown from "./Dropdown";
 
-interface AboutYouProps extends SignupStageProps {}
+interface AboutYouProps extends SignupStageProps {
+  password: string;
+}
 
 export default function AboutYou(props: AboutYouProps) {
   const [hairColor, setHairColor] = useState("");
   const [eyeColor, setEyeColor] = useState("");
   const [mbti, setMbti] = useState("");
+  const [height, setHeight] = useState("");
+  const [unit, setUnit] = useState(null as null | string);
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const validHairColor = isValidHex(hairColor);
   const validEyeColor = isValidHex(eyeColor);
   const validMbti = isValidMbti(mbti);
+  const validHeight = height.length > 0 && isValidNumber(height);
+  const validConfirmPassword = confirmPassword === props.password;
+  const validUnit = Boolean(unit);
 
   const showHairColorError = hairColor.length > 0 && !validHairColor;
   const showEyeColorError = eyeColor.length > 0 && !validEyeColor;
   const showMbtiError = mbti.length > 0 && !validMbti;
+  const showHeightError = height.length > 0 && !validHeight;
+  const showConfirmPasswordError =
+    confirmPassword.length > 0 && !validConfirmPassword;
 
-  const canMoveOn = Boolean(validEyeColor && validHairColor);
+  const canShowConfirmPassword =
+    validEyeColor && validHairColor && validMbti && validHeight && validUnit;
+
+  const canMoveOn = canShowConfirmPassword && validConfirmPassword;
 
   const moveOn = () => {
     props.goToNextStage();
@@ -61,6 +75,35 @@ export default function AboutYou(props: AboutYouProps) {
           error={showMbtiError && "Must be a valid MBTI"}
           placeholder="ENFJ"
         />
+        <Input
+          value={height}
+          updateValue={setHeight}
+          label="Height"
+          error={showHeightError && "Must be a valid number"}
+          placeholder="0.001"
+          splitPercent={30}
+        >
+          <Dropdown
+            options={[
+              "nautical miles",
+              "yards",
+              "Subway® Footlongs",
+              "football fields",
+              "cubits",
+            ]}
+            value={unit}
+            setValue={setUnit}
+          />
+        </Input>
+        {canShowConfirmPassword && (
+          <Input
+            value={confirmPassword}
+            updateValue={setConfirmPassword}
+            label="Confirm password"
+            error={showConfirmPasswordError && "Passwords do not match"}
+            password={true}
+          />
+        )}
         <Button text={"Create account"} enabled={canMoveOn} onClick={moveOn} />
       </div>
     </div>

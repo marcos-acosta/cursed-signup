@@ -12,14 +12,20 @@ const enum SignupStage {
   ABOUT_YOU = 3,
 }
 
+const DEV_STARTING_STAGE = SignupStage.ABOUT_YOU;
+const DEV_PASSWORD = "password";
+
 const STARTING_PAGE =
   process.env.NODE_ENV === "development"
-    ? SignupStage.ABOUT_YOU
+    ? DEV_STARTING_STAGE
     : SignupStage.BASIC_INFO;
+
+const INITIAL_PASSWORD =
+  STARTING_PAGE === SignupStage.BASIC_INFO ? "" : DEV_PASSWORD;
 
 export default function Home() {
   const [signupStage, setSignupStage] = useState(STARTING_PAGE);
-  const [password, setPassword] = useState("");
+  const [password, setPassword] = useState(INITIAL_PASSWORD);
 
   const nextSignupStage = () => {
     setSignupStage(signupStage + 1);
@@ -31,7 +37,7 @@ export default function Home() {
     ) : signupStage === SignupStage.CONFIRM_PASSWORD ? (
       <ConfirmPassword goToNextStage={nextSignupStage} password={password} />
     ) : signupStage === SignupStage.ABOUT_YOU ? (
-      <AboutYou goToNextStage={nextSignupStage} />
+      <AboutYou goToNextStage={nextSignupStage} password={password} />
     ) : (
       <></>
     );
