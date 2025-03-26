@@ -1,3 +1,3 @@
-interface SignupStageProps {
+export interface SignupStageProps {
   goToNextStage: () => void;
 }

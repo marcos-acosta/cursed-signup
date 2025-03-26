@@ -3,6 +3,7 @@ import Input from "./Input";
 import styles from "./styles.module.css";
 import Button from "./Button";
 import { isValidEmail } from "../util";
+import { SignupStageProps } from "../interfaces";
 
 interface BasicInfoProps extends SignupStageProps {
   setPassword: (s: string) => void;

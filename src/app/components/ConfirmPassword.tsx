@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Input from "./Input";
 import styles from "./styles.module.css";
 import Button from "./Button";
+import { SignupStageProps } from "../interfaces";
 
 interface ConfirmPasswordProps extends SignupStageProps {
   password: string;

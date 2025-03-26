@@ -5,6 +5,7 @@ import Button from "./Button";
 import { isValidHex, isValidMbti, isValidNumber } from "../util";
 import ColorSwatch from "./ColorSwatch";
 import Dropdown from "./Dropdown";
+import { SignupStageProps } from "../interfaces";
 
 interface AboutYouProps extends SignupStageProps {
   password: string;
