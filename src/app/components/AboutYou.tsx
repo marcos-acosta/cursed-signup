@@ -100,7 +100,7 @@ export default function AboutYou(props: AboutYouProps) {
           updateValue={setHeight}
           label="Height"
           error={showHeightError && "Must be a valid number"}
-          placeholder="0.001"
+          placeholder="72"
           splitPercent={30}
         >
           <Dropdown
