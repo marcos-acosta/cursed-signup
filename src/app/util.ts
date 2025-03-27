@@ -11,3 +11,16 @@ export const isValidEmail = (email: string) => EMAIL_REGEX.test(email);
 export const isValidHex = (hex: string) => REHEX.test(hex);
 export const isValidMbti = (mbti: string) => MBTI_REGEX.test(mbti);
 export const isValidNumber = (num: string) => NUMBER_REGEX.test(num);
+
+export const defaultFormatter = (n: any) => `${n}`;
+export const phoneNumberFormatter = (n: number | null) => {
+  if (!n) {
+    return "+1 (___) ___-____";
+  } else {
+    const numberString = `${n}`;
+    return `+1 (${numberString.slice(0, 3)}) ${numberString.slice(
+      3,
+      6
+    )}-${numberString.slice(6)}`;
+  }
+};

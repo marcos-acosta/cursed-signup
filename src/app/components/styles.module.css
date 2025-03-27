@@ -126,3 +126,12 @@
   border: 1px solid var(--foreground);
   outline: none;
 }
+
+.slider {
+  width: 100%;
+}
+
+.sliderValueContainer {
+  width: 100%;
+  text-align: right;
+}

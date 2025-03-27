@@ -2,7 +2,12 @@ import React, { useState } from "react";
 import Input from "./Input";
 import styles from "./styles.module.css";
 import Button from "./Button";
-import { isValidHex, isValidMbti, isValidNumber } from "../util";
+import {
+  isValidHex,
+  isValidMbti,
+  isValidNumber,
+  phoneNumberFormatter,
+} from "../util";
 import ColorSwatch from "./ColorSwatch";
 import Dropdown from "./Dropdown";
 import { SignupStageProps } from "../interfaces";
@@ -18,6 +23,7 @@ export default function AboutYou(props: AboutYouProps) {
   const [height, setHeight] = useState("");
   const [unit, setUnit] = useState(null as null | string);
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState(null as number | null);
 
   const validHairColor = isValidHex(hairColor);
   const validEyeColor = isValidHex(eyeColor);
@@ -25,6 +31,7 @@ export default function AboutYou(props: AboutYouProps) {
   const validHeight = height.length > 0 && isValidNumber(height);
   const validConfirmPassword = confirmPassword === props.password;
   const validUnit = Boolean(unit);
+  const validPhoneNumber = Boolean(phoneNumber);
 
   const showHairColorError = hairColor.length > 0 && !validHairColor;
   const showEyeColorError = eyeColor.length > 0 && !validEyeColor;
@@ -34,7 +41,12 @@ export default function AboutYou(props: AboutYouProps) {
     confirmPassword.length > 0 && !validConfirmPassword;
 
   const canShowConfirmPassword =
-    validEyeColor && validHairColor && validMbti && validHeight && validUnit;
+    validEyeColor &&
+    validHairColor &&
+    validMbti &&
+    validHeight &&
+    validUnit &&
+    validPhoneNumber;
 
   const canMoveOn = canShowConfirmPassword && validConfirmPassword;
 
@@ -49,6 +61,13 @@ export default function AboutYou(props: AboutYouProps) {
         Let&apos;s get to know you!
       </div>
       <div className={styles.formContainer}>
+        <Input
+          value={phoneNumber}
+          updateValue={setPhoneNumber}
+          label="Phone number"
+          slider={true}
+          sliderFormatter={phoneNumberFormatter}
+        />
         <Input
           value={hairColor}
           updateValue={setHairColor}

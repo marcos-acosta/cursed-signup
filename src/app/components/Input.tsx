@@ -1,25 +1,34 @@
 import React from "react";
 import styles from "./styles.module.css";
-import { combineClasses } from "../util";
+import { combineClasses, defaultFormatter } from "../util";
 import { MONO_FONT } from "../fonts";
 import SideBySide from "./SideBySide";
+import Slider from "./Slider";
 
 export interface InputProps {
-  value: string;
+  value: string | number | null;
   placeholder?: string;
   label: string;
-  updateValue: (s: string) => void;
+  updateValue: (s: any) => void;
   optional?: boolean;
   error?: string | false | undefined;
   password?: boolean;
+  slider?: boolean;
+  sliderFormatter?: (v: number | null) => string;
   children?: JSX.Element;
   splitPercent?: number;
 }
 
 export default function Input(props: InputProps) {
-  const inputElement = (
+  const inputElement = props.slider ? (
+    <Slider
+      value={parseInt(`${props.value}`)}
+      setValue={props.updateValue}
+      format={props.sliderFormatter || defaultFormatter}
+    />
+  ) : (
     <input
-      value={props.value}
+      value={props.value || ""}
       onChange={(e) => props.updateValue(e.target.value)}
       className={combineClasses(
         styles.inputElement,
