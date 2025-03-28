@@ -16,9 +16,10 @@ const SECURITY_QUESTIONS = [
   "What time is it right now?",
   "Who was the first female U.S. Senator?",
   PASSWORD_QUESTION,
-  "Why do you intermittently experience that unsettling feeling that you never fully understood the rules of a game that everyone else has long ago figured out?",
+  "When will you tell them the truth?",
   "What was the model of your first private jet?",
   "What is something you constantly forget?",
+  "What is the first letter on your keyboard?",
 ];
 
 export default function SecurityQuestions(props: SecurityQuestionsProps) {
