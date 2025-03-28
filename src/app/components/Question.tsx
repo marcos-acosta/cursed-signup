@@ -7,6 +7,7 @@ interface QuestionProps {
   label: string;
   optional?: boolean;
   error?: string | false;
+  stackVertically?: boolean;
 }
 
 export default function Question(props: QuestionProps) {
@@ -17,7 +18,10 @@ export default function Question(props: QuestionProps) {
         {props.optional ? "" : "*"}
       </div>
       {Array.isArray(props.children) ? (
-        <SideBySide splitPercent={props.splitPercent}>
+        <SideBySide
+          splitPercent={props.splitPercent}
+          stackVertically={props.stackVertically}
+        >
           {props.children[0]}
           {props.children[1]}
         </SideBySide>

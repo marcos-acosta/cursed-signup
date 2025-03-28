@@ -5,6 +5,7 @@ interface DropdownProps {
   options: string[];
   value: string | null;
   setValue: (s: string) => void;
+  placeholder?: string;
 }
 
 export default function Dropdown(props: DropdownProps) {
@@ -16,7 +17,7 @@ export default function Dropdown(props: DropdownProps) {
         value={props.value || "initial"}
       >
         <option disabled value="initial">
-          (select unit)
+          {props.placeholder || "(Select value)"}
         </option>
         {props.options.map((option) => (
           <option key={option} value={option}>

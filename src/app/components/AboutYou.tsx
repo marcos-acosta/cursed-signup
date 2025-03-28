@@ -130,6 +130,7 @@ export default function AboutYou(props: AboutYouProps) {
             ]}
             value={unit}
             setValue={setUnit}
+            placeholder="(Select unit)"
           />
         </Question>
         {canShowConfirmPassword && (
