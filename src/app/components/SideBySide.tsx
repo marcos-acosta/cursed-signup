@@ -10,8 +10,8 @@ export interface SideBySideProps {
 export default function SideBySide(props: SideBySideProps) {
   const gridTemplateColumns = props.stackVertically
     ? undefined
-    : `${props.splitPercent || "50"}% auto`;
-  const gridTemplateRows = props.stackVertically ? "auto auto" : undefined;
+    : `${props.splitPercent || "50"}% 1fr`;
+  const gridTemplateRows = props.stackVertically ? "1fr 1fr" : undefined;
 
   return (
     <div
