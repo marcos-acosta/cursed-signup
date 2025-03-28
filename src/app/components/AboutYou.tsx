@@ -11,6 +11,8 @@ import {
 import ColorSwatch from "./ColorSwatch";
 import Dropdown from "./Dropdown";
 import { SignupStageProps } from "../interfaces";
+import Question from "./Question";
+import Slider from "./Slider";
 
 interface AboutYouProps extends SignupStageProps {
   password: string;
@@ -61,48 +63,63 @@ export default function AboutYou(props: AboutYouProps) {
         Let&apos;s get to know you!
       </div>
       <div className={styles.formContainer}>
-        <Input
-          value={phoneNumber}
-          updateValue={setPhoneNumber}
-          label="Phone number"
-          slider={true}
-          sliderFormatter={phoneNumberFormatter}
-        />
-        <Input
-          value={hairColor}
-          updateValue={setHairColor}
+        <Question label="Phone number">
+          <Slider
+            value={phoneNumber}
+            setValue={setPhoneNumber}
+            format={phoneNumberFormatter}
+            min={1000000000}
+            max={9999999999}
+          />
+        </Question>
+        <Question
           label="Hair color"
-          placeholder="#4a0f06"
+          splitPercent={70}
           error={showHairColorError && "Must be a valid hex color"}
-          splitPercent={70}
         >
+          <Input
+            value={hairColor}
+            updateValue={setHairColor}
+            placeholder="#4a0f06"
+            error={showHairColorError}
+          />
           <ColorSwatch color={validHairColor && hairColor} />
-        </Input>
-        <Input
-          value={eyeColor}
-          updateValue={setEyeColor}
+        </Question>
+        <Question
           label="Eye color"
-          placeholder="#78d8f5"
-          error={showEyeColorError && "Must be a valid hex color"}
           splitPercent={70}
+          error={showEyeColorError && "Must be a valid hex color"}
         >
+          <Input
+            value={eyeColor}
+            updateValue={setEyeColor}
+            placeholder="#78d8f5"
+            error={showEyeColorError}
+          />
           <ColorSwatch color={validEyeColor && eyeColor} />
-        </Input>
-        <Input
-          value={mbti}
-          updateValue={setMbti}
+        </Question>
+        <Question
           label="Myers-Briggs Type Indicator"
           error={showMbtiError && "Must be a valid MBTI"}
-          placeholder="ENFJ"
-        />
-        <Input
-          value={height}
-          updateValue={setHeight}
+        >
+          <Input
+            value={mbti}
+            updateValue={setMbti}
+            error={showMbtiError}
+            placeholder="ENFJ"
+          />
+        </Question>
+        <Question
           label="Height"
           error={showHeightError && "Must be a valid number"}
-          placeholder="72"
           splitPercent={30}
         >
+          <Input
+            value={height}
+            updateValue={setHeight}
+            error={showHeightError}
+            placeholder="72"
+          />
           <Dropdown
             options={[
               "nautical miles",
@@ -114,15 +131,19 @@ export default function AboutYou(props: AboutYouProps) {
             value={unit}
             setValue={setUnit}
           />
-        </Input>
+        </Question>
         {canShowConfirmPassword && (
-          <Input
-            value={confirmPassword}
-            updateValue={setConfirmPassword}
+          <Question
             label="Confirm password"
             error={showConfirmPasswordError && "Passwords do not match"}
-            password={true}
-          />
+          >
+            <Input
+              value={confirmPassword}
+              updateValue={setConfirmPassword}
+              error={showConfirmPasswordError}
+              password={true}
+            />
+          </Question>
         )}
         <Button text={"Create account"} enabled={canMoveOn} onClick={moveOn} />
       </div>

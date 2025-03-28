@@ -3,6 +3,7 @@ import Input from "./Input";
 import styles from "./styles.module.css";
 import Button from "./Button";
 import { SignupStageProps } from "../interfaces";
+import Question from "./Question";
 
 interface ConfirmPasswordProps extends SignupStageProps {
   password: string;
@@ -43,32 +44,44 @@ export default function ConfirmPassword(props: ConfirmPasswordProps) {
         are a common source of identity theft.
       </div>
       <div className={styles.formContainer}>
-        <Input
-          value={confirmPassword}
-          updateValue={setConfirmPassword}
+        <Question
           label="Confirm password"
           error={showConfirmPasswordError && "Passwords do not match"}
-          password={true}
-        />
+        >
+          <Input
+            value={confirmPassword}
+            updateValue={setConfirmPassword}
+            error={showConfirmPasswordError}
+            password={true}
+          />
+        </Question>
         {validConfirmPassword && (
           <>
-            <Input
-              value={confirmPasswordAgain}
-              updateValue={setConfirmPasswordAgain}
+            <Question
               label="Confirm password again"
               error={showConfirmPasswordErrorAgain && "Passwords do not match"}
-              password={true}
-            />
-            {validConfirmPasswordAgain && (
+            >
               <Input
-                value={confirmPasswordLastTime}
-                updateValue={setConfirmPasswordLastTime}
+                value={confirmPasswordAgain}
+                updateValue={setConfirmPasswordAgain}
+                error={showConfirmPasswordErrorAgain}
+                password={true}
+              />
+            </Question>
+            {validConfirmPasswordAgain && (
+              <Question
                 label="Maximally confirm password"
                 error={
                   showConfirmPasswordErrorLastTime && "Passwords do not match"
                 }
-                password={true}
-              />
+              >
+                <Input
+                  value={confirmPasswordLastTime}
+                  updateValue={setConfirmPasswordLastTime}
+                  error={showConfirmPasswordErrorLastTime}
+                  password={true}
+                />
+              </Question>
             )}
           </>
         )}

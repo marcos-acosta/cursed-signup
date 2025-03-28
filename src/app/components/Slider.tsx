@@ -6,6 +6,8 @@ interface SliderProps {
   value: number | null;
   setValue: (n: number) => void;
   format: (n: number | null) => string;
+  min?: number;
+  max?: number;
 }
 
 export default function Slider(props: SliderProps) {
@@ -21,9 +23,9 @@ export default function Slider(props: SliderProps) {
       </div>
       <input
         type="range"
-        min={1000000000}
-        max={9999999999}
-        value={props.value || 1000000000}
+        min={props.min || 1}
+        max={props.max || 10}
+        value={props.value || 5}
         onChange={(e) => props.setValue(parseInt(e.target.value))}
         className={styles.slider}
       />

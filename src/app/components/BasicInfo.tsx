@@ -4,6 +4,7 @@ import styles from "./styles.module.css";
 import Button from "./Button";
 import { isValidEmail } from "../util";
 import { SignupStageProps } from "../interfaces";
+import Question from "./Question";
 
 interface BasicInfoProps extends SignupStageProps {
   setPassword: (s: string) => void;
@@ -46,40 +47,54 @@ export default function BasicInfo(props: BasicInfoProps) {
         solely for your amusement.
       </div>
       <div className={styles.formContainer}>
-        <Input
-          value={firstName}
-          updateValue={setFirstName}
-          label="First name"
-          placeholder="Alex"
-        />
-        <Input
-          value={lastName}
-          updateValue={setLastName}
-          label="Last name"
-          placeholder="Jones"
-        />
-        <Input
-          value={email}
-          updateValue={setEmail}
+        <Question label="First name">
+          <Input
+            value={firstName}
+            updateValue={setFirstName}
+            placeholder="Alex"
+          />
+        </Question>
+        <Question label="Last name">
+          <Input
+            value={lastName}
+            updateValue={setLastName}
+            placeholder="Jones"
+          />
+        </Question>
+        <Question
           label="Email"
           error={showEmailError && "Must be a valid email address"}
-          placeholder="alex.jones@gmail.com"
-        />
-        <Input
-          value={password}
-          updateValue={setPassword}
+        >
+          <Input
+            value={email}
+            updateValue={setEmail}
+            placeholder="alex.jones@gmail.com"
+            error={showEmailError}
+          />
+        </Question>
+        <Question
           label="Password"
           error={showPasswordError && "Must be >6 characters"}
-          password={true}
-        />
-        {validPassword && (
+        >
           <Input
-            value={confirmPassword}
-            updateValue={setConfirmPassword}
-            label="Confirm password"
-            error={showConfirmPasswordError && "Passwords do not match"}
+            value={password}
+            updateValue={setPassword}
+            error={showPasswordError}
             password={true}
           />
+        </Question>
+        {validPassword && (
+          <Question
+            label="Confirm password"
+            error={showConfirmPasswordError && "Passwords do not match"}
+          >
+            <Input
+              value={confirmPassword}
+              updateValue={setConfirmPassword}
+              error={showConfirmPasswordError}
+              password={true}
+            />
+          </Question>
         )}
         <Button text={"Create account"} enabled={canMoveOn} onClick={moveOn} />
       </div>
