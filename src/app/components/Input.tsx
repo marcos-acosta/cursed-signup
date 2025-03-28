@@ -4,9 +4,9 @@ import { combineClasses } from "../util";
 import { MONO_FONT } from "../fonts";
 
 export interface InputProps {
-  value: string | number | null;
+  value: string;
   placeholder?: string;
-  updateValue: (s: any) => void;
+  updateValue: (s: string) => void;
   error?: boolean;
   password?: boolean;
 }
