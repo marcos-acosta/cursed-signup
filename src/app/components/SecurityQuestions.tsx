@@ -20,6 +20,8 @@ const SECURITY_QUESTIONS = [
   "What was the model of your first private jet?",
   "What is something you constantly forget?",
   "What is the first letter on your keyboard?",
+  "How many friends do you have?",
+  "What is the name of your favorite armadillo?",
 ];
 
 export default function SecurityQuestions(props: SecurityQuestionsProps) {
