@@ -14,7 +14,7 @@ const enum SignupStage {
   SECURITY_QUESTIONS = 4,
 }
 
-const DEV_STARTING_STAGE = SignupStage.SECURITY_QUESTIONS;
+const DEV_STARTING_STAGE = SignupStage.BASIC_INFO;
 const DEV_PASSWORD = "password";
 
 const STARTING_PAGE =
