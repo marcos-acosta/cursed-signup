@@ -70,6 +70,7 @@ export default function BasicInfo(props: BasicInfoProps) {
             updateValue={setEmail}
             placeholder="first.last@example.com"
             error={showEmailError}
+            type="email"
           />
         </Question>
         <Question
@@ -80,7 +81,7 @@ export default function BasicInfo(props: BasicInfoProps) {
             value={password}
             updateValue={setPassword}
             error={showPasswordError}
-            password={true}
+            type="password"
           />
         </Question>
         {validPassword && (
@@ -92,7 +93,7 @@ export default function BasicInfo(props: BasicInfoProps) {
               value={confirmPassword}
               updateValue={setConfirmPassword}
               error={showConfirmPasswordError}
-              password={true}
+              type="password"
             />
           </Question>
         )}

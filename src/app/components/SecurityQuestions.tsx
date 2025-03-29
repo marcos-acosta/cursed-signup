@@ -94,7 +94,7 @@ export default function SecurityQuestions(props: SecurityQuestionsProps) {
             updateValue={setAnswer1}
             placeholder="Answer #1"
             error={Boolean(question1Error)}
-            password={question1 === PASSWORD_QUESTION}
+            type={question1 === PASSWORD_QUESTION ? "password" : undefined}
           />
         </Question>
         <Question
@@ -113,7 +113,7 @@ export default function SecurityQuestions(props: SecurityQuestionsProps) {
             updateValue={setAnswer2}
             placeholder="Answer #2"
             error={Boolean(question2Error)}
-            password={question2 === PASSWORD_QUESTION}
+            type={question2 === PASSWORD_QUESTION ? "password" : undefined}
           />
         </Question>
         <Question
@@ -132,7 +132,7 @@ export default function SecurityQuestions(props: SecurityQuestionsProps) {
             updateValue={setAnswer3}
             placeholder="Answer #3"
             error={Boolean(question3Error)}
-            password={question3 === PASSWORD_QUESTION}
+            type={question3 === PASSWORD_QUESTION ? "password" : undefined}
           />
         </Question>
         <Button

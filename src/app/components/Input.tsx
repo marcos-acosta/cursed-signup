@@ -8,7 +8,7 @@ export interface InputProps {
   placeholder?: string;
   updateValue: (s: string) => void;
   error?: boolean;
-  password?: boolean;
+  type?: "password" | "email";
 }
 
 export default function Input(props: InputProps) {
@@ -22,7 +22,7 @@ export default function Input(props: InputProps) {
         props.error && styles.inputError
       )}
       placeholder={props.placeholder}
-      type={props.password ? "password" : "text"}
+      type={props.type || "text"}
     />
   );
 }
