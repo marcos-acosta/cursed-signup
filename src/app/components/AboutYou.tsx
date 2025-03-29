@@ -142,7 +142,7 @@ export default function AboutYou(props: AboutYouProps) {
               value={confirmPassword}
               updateValue={setConfirmPassword}
               error={showConfirmPasswordError}
-              password={true}
+              type="password"
             />
           </Question>
         )}
