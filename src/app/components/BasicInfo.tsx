@@ -51,14 +51,14 @@ export default function BasicInfo(props: BasicInfoProps) {
           <Input
             value={firstName}
             updateValue={setFirstName}
-            placeholder="Alex"
+            placeholder="First"
           />
         </Question>
         <Question label="Last name">
           <Input
             value={lastName}
             updateValue={setLastName}
-            placeholder="Jones"
+            placeholder="Last"
           />
         </Question>
         <Question
@@ -68,7 +68,7 @@ export default function BasicInfo(props: BasicInfoProps) {
           <Input
             value={email}
             updateValue={setEmail}
-            placeholder="alex.jones@gmail.com"
+            placeholder="first.last@example.com"
             error={showEmailError}
           />
         </Question>
