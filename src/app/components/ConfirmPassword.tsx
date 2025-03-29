@@ -52,7 +52,7 @@ export default function ConfirmPassword(props: ConfirmPasswordProps) {
             value={confirmPassword}
             updateValue={setConfirmPassword}
             error={showConfirmPasswordError}
-            password={true}
+            type="password"
           />
         </Question>
         {validConfirmPassword && (
@@ -65,7 +65,7 @@ export default function ConfirmPassword(props: ConfirmPasswordProps) {
                 value={confirmPasswordAgain}
                 updateValue={setConfirmPasswordAgain}
                 error={showConfirmPasswordErrorAgain}
-                password={true}
+                type="password"
               />
             </Question>
             {validConfirmPasswordAgain && (
@@ -79,7 +79,7 @@ export default function ConfirmPassword(props: ConfirmPasswordProps) {
                   value={confirmPasswordLastTime}
                   updateValue={setConfirmPasswordLastTime}
                   error={showConfirmPasswordErrorLastTime}
-                  password={true}
+                  type="password"
                 />
               </Question>
             )}
