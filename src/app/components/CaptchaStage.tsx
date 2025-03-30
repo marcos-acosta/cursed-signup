@@ -61,7 +61,6 @@ export default function CaptchaStage(props: CaptchaStageProps) {
       const numPartitions = nextCaptcha.pathName === "chess" ? 8 : 4;
       const nextImagePaths = getAllPaths(nextCaptcha.pathName, numPartitions);
       nextImagePaths.forEach((path) => {
-        console.log(`Preloading image ${path}`);
         const img = new Image();
         img.src = path;
       });
