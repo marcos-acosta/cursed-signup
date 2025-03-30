@@ -5,6 +5,7 @@ interface CaptchaPartitionProps {
   imagePath: string;
   selected: boolean;
   select: () => void;
+  password?: string;
 }
 
 export default function CaptchaPartition(props: CaptchaPartitionProps) {
@@ -32,7 +33,15 @@ export default function CaptchaPartition(props: CaptchaPartitionProps) {
             </span>
           </div>
         )}
-        <img src={props.imagePath} className={styles.imagePartition} alt="" />
+        {props.password ? (
+          <div className={styles.passwordContainer}>
+            <div className={styles.passwordInnerContainer}>
+              {props.password}
+            </div>
+          </div>
+        ) : (
+          <img src={props.imagePath} className={styles.imagePartition} alt="" />
+        )}
       </div>
     </div>
   );

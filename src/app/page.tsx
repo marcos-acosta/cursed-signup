@@ -17,7 +17,7 @@ const enum SignupStage {
 }
 
 const DEV_STARTING_STAGE = SignupStage.CAPTCHA;
-const DEV_PASSWORD = "password";
+const DEV_PASSWORD = "password123";
 
 const STARTING_PAGE =
   process.env.NODE_ENV === "development"

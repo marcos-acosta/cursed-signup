@@ -19,6 +19,7 @@ const CAPTCHAS: CaptchaImage[] = [
   { object: "pipes", pathName: "pipe" },
   { object: "Waldo", pathName: "waldo" },
   { object: "pieces involved in checkmate", pathName: "chess" },
+  { object: "your password", pathName: "password" },
   { object: "Rick Astleys", pathName: "rick" },
 ];
 
@@ -39,6 +40,14 @@ export default function CaptchaStage(props: CaptchaStageProps) {
     }
   }, [captchaImage]);
 
+  const nextCaptcha = () => {
+    if (captchaIndex === CAPTCHAS.length - 1) {
+      props.goToNextStage();
+    } else {
+      setCaptchaIndex(captchaIndex + 1);
+    }
+  };
+
   return (
     <div>
       <div className={styles.titleContainer}>
@@ -58,7 +67,7 @@ export default function CaptchaStage(props: CaptchaStageProps) {
           password={props.password}
           imagePath={captchaImage.pathName}
           identificationObject={captchaImage.object}
-          nextCaptcha={() => setCaptchaIndex(captchaIndex + 1)}
+          nextCaptcha={nextCaptcha}
           numPartitions={captchaImage.pathName === "chess" ? 8 : 4}
         />
       )}

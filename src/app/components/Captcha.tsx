@@ -47,10 +47,21 @@ export default function Captcha(props: CaptchaProps) {
           selected={isPartitionSelected}
           key={`${i}-${j}`}
           select={getSelectPartitionFn(i, j, isPartitionSelected)}
+          password={
+            i == 3 && j == 3 && props.imagePath === "password"
+              ? props.password
+              : undefined
+          }
         />
       );
     }
   }
+
+  const isValidPassword =
+    props.imagePath !== "password" ||
+    (selectedPartitions.length === 1 &&
+      partitionsEqual(3, 3, selectedPartitions[0]));
+  const showInvalidPassword = !isValidPassword && selectedPartitions.length > 0;
 
   useEffect(() => {
     setSelectedPartitions([]);
@@ -76,8 +87,15 @@ export default function Captcha(props: CaptchaProps) {
         <div className={styles.captchaGrid} style={gridStyle}>
           {...partitions}
         </div>
+        {showInvalidPassword && (
+          <div className={styles.captchaError}>Passwords do not match</div>
+        )}
         <div className={styles.verifyButtonContainer}>
-          <button className={styles.verifyButton} onClick={props.nextCaptcha}>
+          <button
+            className={styles.verifyButton}
+            onClick={props.nextCaptcha}
+            disabled={!isValidPassword}
+          >
             VERIFY
           </button>
         </div>
