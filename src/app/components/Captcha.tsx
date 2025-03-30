@@ -37,7 +37,7 @@ export default function Captcha(props: CaptchaProps) {
   const isSelected = (i: number, j: number) =>
     selectedPartitions.find((partition) => partitionsEqual(i, j, partition));
 
-  let partitions = [] as JSX.Element[];
+  const partitions = [] as JSX.Element[];
   for (let i = 1; i <= numPartitions1d; i++) {
     for (let j = 1; j <= numPartitions1d; j++) {
       const isPartitionSelected = Boolean(isSelected(i, j));
@@ -57,7 +57,7 @@ export default function Captcha(props: CaptchaProps) {
   }, [props.identificationObject]);
 
   const rowsAndColumns = [...Array(numPartitions1d).keys()]
-    .map((_) => "1fr")
+    .map(() => "1fr")
     .join(" ");
   const gridStyle = {
     gridTemplateColumns: rowsAndColumns,

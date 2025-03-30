@@ -32,7 +32,7 @@ export default function CaptchaPartition(props: CaptchaPartitionProps) {
             </span>
           </div>
         )}
-        <img src={props.imagePath} className={styles.imagePartition} />
+        <img src={props.imagePath} className={styles.imagePartition} alt="" />
       </div>
     </div>
   );
