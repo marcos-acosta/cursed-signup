@@ -6,15 +6,17 @@ import BasicInfo from "./components/BasicInfo";
 import ConfirmPassword from "./components/ConfirmPassword";
 import AboutYou from "./components/AboutYou";
 import SecurityQuestions from "./components/SecurityQuestions";
+import CaptchaStage from "./components/CaptchaStage";
 
 const enum SignupStage {
   BASIC_INFO = 1,
   CONFIRM_PASSWORD = 2,
   ABOUT_YOU = 3,
   SECURITY_QUESTIONS = 4,
+  CAPTCHA = 5,
 }
 
-const DEV_STARTING_STAGE = SignupStage.BASIC_INFO;
+const DEV_STARTING_STAGE = SignupStage.CAPTCHA;
 const DEV_PASSWORD = "password";
 
 const STARTING_PAGE =
@@ -42,6 +44,8 @@ export default function Home() {
       <AboutYou goToNextStage={nextSignupStage} password={password} />
     ) : signupStage === SignupStage.SECURITY_QUESTIONS ? (
       <SecurityQuestions goToNextStage={nextSignupStage} password={password} />
+    ) : signupStage === SignupStage.CAPTCHA ? (
+      <CaptchaStage goToNextStage={nextSignupStage} password={password} />
     ) : (
       <></>
     );
