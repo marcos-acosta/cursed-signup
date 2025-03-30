@@ -23,6 +23,16 @@ const CAPTCHAS: CaptchaImage[] = [
   { object: "Rick Astleys", pathName: "rick" },
 ];
 
+const getAllPaths = (prefix: string, numPartitions: number) => {
+  const partitions = [] as string[];
+  for (let i = 1; i <= numPartitions; i++) {
+    for (let j = 1; j <= numPartitions; j++) {
+      partitions.push(`/images/${prefix}/partition-${i}-${j}.png`);
+    }
+  }
+  return partitions;
+};
+
 export default function CaptchaStage(props: CaptchaStageProps) {
   const [beganCaptcha, setBeganCaptcha] = useState(false);
   const [captchaIndex, setCaptchaIndex] = useState(0);
@@ -39,6 +49,24 @@ export default function CaptchaStage(props: CaptchaStageProps) {
       }
     }
   }, [captchaImage]);
+
+  useEffect(() => {
+    setTimeout(preloadNextBatch, 1000);
+  }, [beganCaptcha, captchaIndex]);
+
+  const preloadNextBatch = () => {
+    const nextIndexToLoad = beganCaptcha ? captchaIndex + 1 : 0;
+    if (nextIndexToLoad < CAPTCHAS.length) {
+      const nextCaptcha = CAPTCHAS[nextIndexToLoad];
+      const numPartitions = nextCaptcha.pathName === "chess" ? 8 : 4;
+      const nextImagePaths = getAllPaths(nextCaptcha.pathName, numPartitions);
+      nextImagePaths.forEach((path) => {
+        console.log(`Preloading image ${path}`);
+        const img = new Image();
+        img.src = path;
+      });
+    }
+  };
 
   const nextCaptcha = () => {
     if (captchaIndex === CAPTCHAS.length - 1) {
