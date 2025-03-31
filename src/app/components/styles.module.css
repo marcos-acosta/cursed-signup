@@ -275,3 +275,67 @@
 .captchaError {
   color: var(--red);
 }
+
+.stillThereScreen {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.483);
+  z-index: 10;
+}
+
+.stillThereTextContainer {
+  width: 80%;
+  padding: 10px;
+  padding-top: 15px;
+  background-color: var(--background);
+  border: 1px solid var(--foreground);
+}
+
+.stillThereTitle {
+  margin-bottom: 10px;
+}
+
+.stillThereText {
+  margin-bottom: 20px;
+}
+
+.stillHereButtonContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.signedOutBanner {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  background-color: var(--foreground);
+  color: var(--background);
+  z-index: 1;
+  padding: 10px;
+}
+
+.bannerGrid {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.bannerText {
+  flex-grow: 1;
+}
+
+.closeButtonContainer {
+  flex-shrink: 1;
+}
+
+.closeButton {
+  cursor: pointer;
+}

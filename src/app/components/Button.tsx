@@ -7,6 +7,7 @@ export interface ButtonProps {
   text: string;
   enabled: boolean;
   onClick: () => void;
+  autofocus?: boolean;
 }
 
 export default function Button(props: ButtonProps) {
@@ -15,6 +16,7 @@ export default function Button(props: ButtonProps) {
       onClick={props.onClick}
       className={combineClasses(styles.buttonElement, MONO_FONT.className)}
       disabled={!props.enabled}
+      autoFocus={props.autofocus}
     >
       {">"} {props.text}
     </button>
