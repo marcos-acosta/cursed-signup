@@ -10,7 +10,7 @@ export default function SignedOut(props: SignedOutProps) {
     <div className={styles.signedOutBanner}>
       <div className={styles.bannerGrid}>
         <div className={styles.bannerText}>
-          You've been logged out due to inactivity.
+          You&apos;ve been logged out due to inactivity.
         </div>
         <div className={styles.closeButtonContainer}>
           <div

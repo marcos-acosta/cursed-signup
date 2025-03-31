@@ -25,8 +25,8 @@ export default function StillThere(props: StillThereProps) {
           <h1>Still there?</h1>
         </div>
         <div className={styles.stillThereText}>
-          Due to inactivity, your session will be restarted in{" "}
-          {Math.max(secondsLeft, 0)} seconds.
+          For your security, your session will be restarted in{" "}
+          {Math.max(secondsLeft, 0)} seconds due to inactivity.
         </div>
         <div className={styles.stillHereButtonContainer}>
           <Button
