@@ -17,10 +17,14 @@ export default function BasicInfo(props: BasicInfoProps) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [initialFirstName, setInitialFirstName] = useState(
+    null as string | null
+  );
 
   const validFirstName =
     firstName.length > 0 &&
-    !COMMON_FIRST_NAMES.includes(firstName.toLowerCase());
+    !COMMON_FIRST_NAMES.includes(firstName.toLowerCase()) &&
+    firstName.toLowerCase() !== initialFirstName?.toLowerCase();
   const validLastName =
     lastName.length > 0 && !COMMON_LAST_NAMES.includes(lastName.toLowerCase());
   const validEmail = isValidEmail(email);
@@ -47,6 +51,12 @@ export default function BasicInfo(props: BasicInfoProps) {
     props.goToNextStage();
   };
 
+  const onBlurFirstName = () => {
+    if (initialFirstName === null && firstName.length > 0) {
+      setInitialFirstName(firstName);
+    }
+  };
+
   return (
     <div>
       <div className={styles.titleContainer}>
@@ -64,6 +74,7 @@ export default function BasicInfo(props: BasicInfoProps) {
             updateValue={setFirstName}
             error={showFirstNameError}
             placeholder="First"
+            onBlur={onBlurFirstName}
           />
         </Question>
         <Question

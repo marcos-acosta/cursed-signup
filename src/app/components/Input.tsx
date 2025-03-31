@@ -9,6 +9,7 @@ export interface InputProps {
   updateValue: (s: string) => void;
   error?: boolean;
   type?: "password" | "email";
+  onBlur?: () => void;
 }
 
 export default function Input(props: InputProps) {
@@ -23,6 +24,7 @@ export default function Input(props: InputProps) {
       )}
       placeholder={props.placeholder}
       type={props.type || "text"}
+      onBlur={props.onBlur}
     />
   );
 }
