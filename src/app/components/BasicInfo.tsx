@@ -5,6 +5,7 @@ import Button from "./Button";
 import { isValidEmail } from "../util";
 import { SignupStageProps } from "../interfaces";
 import Question from "./Question";
+import { COMMON_FIRST_NAMES, COMMON_LAST_NAMES } from "../common-names";
 
 interface BasicInfoProps extends SignupStageProps {
   setPassword: (s: string) => void;
@@ -17,18 +18,25 @@ export default function BasicInfo(props: BasicInfoProps) {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
+  const validFirstName =
+    firstName.length > 0 &&
+    !COMMON_FIRST_NAMES.includes(firstName.toLowerCase());
+  const validLastName =
+    lastName.length > 0 && !COMMON_LAST_NAMES.includes(lastName.toLowerCase());
   const validEmail = isValidEmail(email);
   const validPassword = password.length > 6;
   const validConfirmPassword = confirmPassword === password;
 
+  const showFirstNameError = firstName.length > 0 && !validFirstName;
+  const showLastNameError = lastName.length > 0 && !validLastName;
   const showEmailError = email.length > 0 && !validEmail;
   const showPasswordError = password.length > 0 && !validPassword;
   const showConfirmPasswordError =
     confirmPassword.length > 0 && !validConfirmPassword;
 
   const canMoveOn = Boolean(
-    firstName.length &&
-      lastName.length &&
+    validFirstName &&
+      validLastName &&
       validEmail &&
       validPassword &&
       validConfirmPassword
@@ -47,17 +55,25 @@ export default function BasicInfo(props: BasicInfoProps) {
         solely for your amusement.
       </div>
       <div className={styles.formContainer}>
-        <Question label="First name">
+        <Question
+          label="First name"
+          error={showFirstNameError && "That first name is taken"}
+        >
           <Input
             value={firstName}
             updateValue={setFirstName}
+            error={showFirstNameError}
             placeholder="First"
           />
         </Question>
-        <Question label="Last name">
+        <Question
+          label="Last name"
+          error={showLastNameError && "That last name is taken"}
+        >
           <Input
             value={lastName}
             updateValue={setLastName}
+            error={showLastNameError}
             placeholder="Last"
           />
         </Question>

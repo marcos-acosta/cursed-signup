@@ -16,7 +16,7 @@ const enum SignupStage {
   CAPTCHA = 5,
 }
 
-const DEV_STARTING_STAGE = SignupStage.CAPTCHA;
+const DEV_STARTING_STAGE = SignupStage.BASIC_INFO;
 const DEV_PASSWORD = "password123";
 
 const STARTING_PAGE =
