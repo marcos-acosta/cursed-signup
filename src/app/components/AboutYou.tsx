@@ -8,6 +8,7 @@ import { SignupStageProps } from "../interfaces";
 import Question from "./Question";
 import Slider from "./Slider";
 import { HexColorPicker } from "react-colorful";
+import ColorSwatch from "./ColorSwatch";
 
 interface AboutYouProps extends SignupStageProps {
   password: string;
@@ -66,6 +67,7 @@ export default function AboutYou(props: AboutYouProps) {
               width: "100%",
             }}
           />
+          <ColorSwatch color={eyeColor} />
         </Question>
         <Question
           label="Myers-Briggs Type Indicator"
