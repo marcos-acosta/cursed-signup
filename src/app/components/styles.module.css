@@ -395,3 +395,18 @@
 .hollowClickablePartition.selected {
   border: calc((95vw - 30px) / 40) solid var(--background);
 }
+
+.phoneNumberDisplay {
+  width: 100%;
+  text-align: center;
+}
+
+.notCloseEnough {
+  color: var(--red);
+}
+
+.formContainer a,
+.titleContainer a {
+  color: var(--dark_gray);
+  text-decoration: underline;
+}

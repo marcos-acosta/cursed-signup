@@ -62,7 +62,11 @@ export default function BasicInfo(props: BasicInfoProps) {
       <div className={styles.titleContainer}>
         <h1>Create an account</h1>
         Nothing you type here gets sent to a server. This signup page exists
-        solely for your amusement.
+        solely for your amusement. Please contact{" "}
+        <a href="https://marcos.ac" target="_blank">
+          support
+        </a>{" "}
+        should you need any assistance.
       </div>
       <div className={styles.formContainer}>
         <Question

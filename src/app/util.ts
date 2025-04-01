@@ -19,7 +19,7 @@ export const phoneNumberFormatter = (n: number | null) => {
   if (!n) {
     return "+1 (___) ___-____";
   } else {
-    const numberString = `${n}`;
+    const numberString = `${n}`.padStart(10, "0");
     return `+1 (${numberString.slice(0, 3)}) ${numberString.slice(
       3,
       6

@@ -6,7 +6,9 @@ import Button from "./Button";
 import Question from "./Question";
 import Input from "./Input";
 
-interface PhoneNumberInputProps extends SignupStageProps {}
+interface PhoneNumberInputProps extends SignupStageProps {
+  setPhoneNumber: (s: string) => void;
+}
 
 const DIGITS = [...Array(10).keys()].map((n) => `${n}`);
 
@@ -44,6 +46,13 @@ export default function PhoneNumberInput(props: PhoneNumberInputProps) {
   const showConfirmNumberError =
     confirmNumber.length > 0 && !validConfirmNumber;
 
+  const moveOn = () => {
+    if (combinedNumber) {
+      props.setPhoneNumber(combinedNumber);
+      props.goToNextStage();
+    }
+  };
+
   return (
     <div>
       <div className={styles.titleContainer}>
@@ -53,7 +62,7 @@ export default function PhoneNumberInput(props: PhoneNumberInputProps) {
       <div className={styles.formContainer}>
         <Question label="First digit">
           <Dropdown
-            options={DIGITS}
+            options={DIGITS.slice(1)}
             value={firstDigit}
             setValue={setFirstDigit}
             placeholder="(Select digit)"
@@ -147,7 +156,7 @@ export default function PhoneNumberInput(props: PhoneNumberInputProps) {
         <Button
           text={"Create account"}
           enabled={Boolean(validConfirmNumber)}
-          onClick={props.goToNextStage}
+          onClick={moveOn}
         />
       </div>
     </div>

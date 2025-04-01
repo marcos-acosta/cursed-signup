@@ -10,6 +10,9 @@ import CaptchaStage from "./components/CaptchaStage";
 import StillThere from "./components/StillThere";
 import SignedOut from "./components/SignedOut";
 import PhoneNumberInput from "./components/PhoneNumberInput";
+import ConfirmNumber from "./components/ConfirmNumber";
+import AccountCreated from "./components/AccountCreated";
+import SecurityBreach from "./components/SecurityBreach";
 
 const enum SignupStage {
   BASIC_INFO = 1,
@@ -18,13 +21,18 @@ const enum SignupStage {
   SECURITY_QUESTIONS = 4,
   CAPTCHA = 5,
   PHONE_NUMBER_INPUT = 6,
+  CONFIRM_PHONE_NUMBER = 7,
+  ACCOUNT_CREATED = 8,
+  SECURITY_BREACHED = 9,
 }
 
-const DEV_STARTING_STAGE = SignupStage.PHONE_NUMBER_INPUT;
+const DEV_STARTING_STAGE = SignupStage.SECURITY_BREACHED;
 const DEV_PASSWORD = "password123";
+const DEV_PHONE_NUMBER = "5000000000";
 
 const PROD_STARTING_STAGE = SignupStage.BASIC_INFO;
 const PROD_INITIAL_PASSWORD = "";
+const PROD_PHONE_NUMBER = "0000000000";
 
 const STARTING_PAGE =
   process.env.NODE_ENV === "development"
@@ -34,12 +42,16 @@ const STARTING_PAGE =
 const INITIAL_PASSWORD =
   STARTING_PAGE === PROD_STARTING_STAGE ? PROD_INITIAL_PASSWORD : DEV_PASSWORD;
 
+const INITIAL_PHONE_NUMBER =
+  STARTING_PAGE === PROD_STARTING_STAGE ? PROD_PHONE_NUMBER : DEV_PHONE_NUMBER;
+
 const MIN_SECONDS_BETWEEN_STILL_THERES = 20;
 const RANDOM_SECONDS = 15;
 
 export default function Home() {
   const [signupStage, setSignupStage] = useState(STARTING_PAGE);
   const [password, setPassword] = useState(INITIAL_PASSWORD);
+  const [phoneNumber, setPhoneNumber] = useState(INITIAL_PHONE_NUMBER);
   const [showingStillThere, setShowingStillThere] = useState(false);
   const [timeoutId, setTimeoutId] = useState(
     null as null | ReturnType<typeof setTimeout>
@@ -74,6 +86,19 @@ export default function Home() {
     setSignupStage(signupStage + 1);
   };
 
+  const reset = () => {
+    setSignupStage(PROD_STARTING_STAGE);
+    setPassword(PROD_INITIAL_PASSWORD);
+    setPhoneNumber(PROD_PHONE_NUMBER);
+  };
+
+  const logOutFromInactivity = () => {
+    reset();
+    setShowingStillThere(false);
+    clearCurrentTimeout();
+    setShowSignedOut(true);
+  };
+
   const stageComponent =
     signupStage === SignupStage.BASIC_INFO ? (
       <BasicInfo goToNextStage={nextSignupStage} setPassword={setPassword} />
@@ -86,18 +111,22 @@ export default function Home() {
     ) : signupStage === SignupStage.CAPTCHA ? (
       <CaptchaStage goToNextStage={nextSignupStage} password={password} />
     ) : signupStage === SignupStage.PHONE_NUMBER_INPUT ? (
-      <PhoneNumberInput goToNextStage={nextSignupStage} />
+      <PhoneNumberInput
+        goToNextStage={nextSignupStage}
+        setPhoneNumber={setPhoneNumber}
+      />
+    ) : signupStage === SignupStage.CONFIRM_PHONE_NUMBER ? (
+      <ConfirmNumber
+        goToNextStage={nextSignupStage}
+        phoneNumber={phoneNumber}
+      />
+    ) : signupStage === SignupStage.ACCOUNT_CREATED ? (
+      <AccountCreated goToNextStage={nextSignupStage} startOver={reset} />
+    ) : signupStage === SignupStage.SECURITY_BREACHED ? (
+      <SecurityBreach goToNextStage={reset} />
     ) : (
       <></>
     );
-
-  const reset = () => {
-    setSignupStage(PROD_STARTING_STAGE);
-    setPassword(PROD_INITIAL_PASSWORD);
-    setShowingStillThere(false);
-    clearCurrentTimeout();
-    setShowSignedOut(true);
-  };
 
   const continueFn = () => {
     setShowingStillThere(false);
@@ -107,7 +136,9 @@ export default function Home() {
   return (
     <>
       <Layout>{stageComponent}</Layout>
-      {showingStillThere && <StillThere continue={continueFn} reset={reset} />}
+      {showingStillThere && (
+        <StillThere continue={continueFn} reset={logOutFromInactivity} />
+      )}
       {showSignedOut && <SignedOut close={() => setShowSignedOut(false)} />}
     </>
   );
