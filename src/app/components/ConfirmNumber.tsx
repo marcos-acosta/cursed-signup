@@ -77,7 +77,15 @@ export default function ConfirmNumber(props: ConfirmNumberProps) {
         <Button
           onClick={clickButton}
           enabled={acceptableDiff === undefined || !acceptableDiff}
-          text={paused ? (areaCode === null ? "Start" : "Try again") : "Stop"}
+          text={
+            acceptableDiff
+              ? "Well done!"
+              : paused
+              ? areaCode === null
+                ? "Start"
+                : "Try again"
+              : "Stop"
+          }
         />
         {acceptableDiff !== undefined && paused && (
           <div

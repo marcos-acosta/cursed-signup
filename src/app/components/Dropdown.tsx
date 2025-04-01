@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./styles.module.css";
+import { combineClasses } from "../util";
 
 interface DropdownProps {
   options: string[];
@@ -12,7 +13,10 @@ export default function Dropdown(props: DropdownProps) {
   return (
     <div className={styles.dropdownContainer}>
       <select
-        className={styles.dropdown}
+        className={combineClasses(
+          styles.dropdown,
+          props.value === null && styles.defaultDropdownOption
+        )}
         onChange={(e) => props.setValue(e.target.value)}
         value={props.value || "initial"}
       >

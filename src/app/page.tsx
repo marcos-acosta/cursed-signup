@@ -26,7 +26,7 @@ const enum SignupStage {
   SECURITY_BREACHED = 9,
 }
 
-const DEV_STARTING_STAGE = SignupStage.CAPTCHA;
+const DEV_STARTING_STAGE = SignupStage.BASIC_INFO;
 const DEV_PASSWORD = "password123";
 const DEV_PHONE_NUMBER = "5000000000";
 
@@ -90,12 +90,12 @@ export default function Home() {
     setSignupStage(PROD_STARTING_STAGE);
     setPassword(PROD_INITIAL_PASSWORD);
     setPhoneNumber(PROD_PHONE_NUMBER);
+    setShowingStillThere(false);
+    clearCurrentTimeout();
   };
 
   const logOutFromInactivity = () => {
     reset();
-    setShowingStillThere(false);
-    clearCurrentTimeout();
     setShowSignedOut(true);
   };
 
