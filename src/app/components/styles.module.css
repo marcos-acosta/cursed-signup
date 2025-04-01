@@ -247,6 +247,10 @@
   font-size: min(5vw, 20px);
 }
 
+.doubleSize .checkIcon {
+  font-size: min(2.5vw, 20px);
+}
+
 .promptContainer {
   background-color: var(--blue);
   color: var(--background);

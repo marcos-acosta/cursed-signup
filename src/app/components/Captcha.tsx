@@ -3,18 +3,19 @@ import CaptchaPartition from "./CaptchaPartition";
 import styles from "./styles.module.css";
 import { PASSWORD_PATHNAME } from "./CaptchaStage";
 import Webcam from "react-webcam";
+import { combineClasses } from "../util";
 
 interface CaptchaProps {
   password: string;
   imagePath: string;
   identificationObject: string;
   nextCaptcha: () => void;
-  numPartitions?: number;
+  isDoubleSize?: boolean;
   useWebcam?: boolean;
 }
 
 export default function Captcha(props: CaptchaProps) {
-  const numPartitions1d = props.numPartitions || 4;
+  const numPartitions1d = props.isDoubleSize ? 8 : 4;
 
   const [selectedPartitions, setSelectedPartitions] = useState(
     [] as number[][]
@@ -98,7 +99,13 @@ export default function Captcha(props: CaptchaProps) {
             <div className={styles.webcamOverlayGrid}>{...partitions}</div>
           </div>
         ) : (
-          <div className={styles.captchaGrid} style={gridStyle}>
+          <div
+            className={combineClasses(
+              styles.captchaGrid,
+              props.isDoubleSize && styles.doubleSize
+            )}
+            style={gridStyle}
+          >
             {...partitions}
           </div>
         )}

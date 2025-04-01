@@ -130,7 +130,7 @@ export default function CaptchaStage(props: CaptchaStageProps) {
             imagePath={captchaImage.pathName}
             identificationObject={captchaImage.object}
             nextCaptcha={nextCaptcha}
-            numPartitions={captchaImage.pathName === CHESS_PATHNAME ? 8 : 4}
+            isDoubleSize={captchaImage.pathName === CHESS_PATHNAME}
             useWebcam={useWebcam}
           />
           <audio src="/rick-roll.mp3" ref={audioRef} />
