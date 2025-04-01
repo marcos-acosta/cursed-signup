@@ -13,7 +13,8 @@ export const isValidMbti = (mbti: string) =>
   MBTI_REGEX.test(mbti.toUpperCase());
 export const isValidNumber = (num: string) => NUMBER_REGEX.test(num);
 
-export const defaultFormatter = (n: number | null) => `${n}`;
+export const zipCodeFormatter = (n: number | null) =>
+  n ? `${n}`.padStart(5, "0") : `_____`;
 export const phoneNumberFormatter = (n: number | null) => {
   if (!n) {
     return "+1 (___) ___-____";

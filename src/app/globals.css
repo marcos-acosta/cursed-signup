@@ -36,3 +36,17 @@ a {
 .react-colorful {
   height: 100px;
 }
+
+div .react-colorful__saturation {
+  border-radius: 0;
+  border-top: 1px solid var(--foreground);
+  border-left: 1px solid var(--foreground);
+  border-right: 1px solid var(--foreground);
+}
+
+div .react-colorful__hue {
+  border-radius: 0;
+  border-bottom: 1px solid var(--foreground);
+  border-left: 1px solid var(--foreground);
+  border-right: 1px solid var(--foreground);
+}

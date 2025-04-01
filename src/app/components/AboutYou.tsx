@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Input from "./Input";
 import styles from "./styles.module.css";
 import Button from "./Button";
-import { isValidMbti, isValidNumber, phoneNumberFormatter } from "../util";
+import { zipCodeFormatter, isValidMbti, isValidNumber } from "../util";
 import Dropdown from "./Dropdown";
 import { SignupStageProps } from "../interfaces";
 import Question from "./Question";
@@ -20,13 +20,13 @@ export default function AboutYou(props: AboutYouProps) {
   const [height, setHeight] = useState("");
   const [unit, setUnit] = useState(null as null | string);
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState(null as number | null);
+  const [zipCode, setZipCode] = useState(null as number | null);
 
   const validMbti = isValidMbti(mbti);
   const validHeight = height.length > 0 && isValidNumber(height);
   const validConfirmPassword = confirmPassword === props.password;
   const validUnit = Boolean(unit);
-  const validPhoneNumber = Boolean(phoneNumber);
+  const validZipCode = Boolean(zipCode);
 
   const showMbtiError = mbti.length > 0 && !validMbti;
   const showHeightError = height.length > 0 && !validHeight;
@@ -34,7 +34,7 @@ export default function AboutYou(props: AboutYouProps) {
     confirmPassword.length > 0 && !validConfirmPassword;
 
   const canShowConfirmPassword =
-    validMbti && validHeight && validUnit && validPhoneNumber;
+    validMbti && validHeight && validUnit && validZipCode;
 
   const canMoveOn = canShowConfirmPassword && validConfirmPassword;
 
@@ -49,13 +49,13 @@ export default function AboutYou(props: AboutYouProps) {
         Let&apos;s get to know you!
       </div>
       <div className={styles.formContainer}>
-        <Question label="Phone number">
+        <Question label="Zip code">
           <Slider
-            value={phoneNumber}
-            setValue={setPhoneNumber}
-            format={phoneNumberFormatter}
-            min={1000000000}
-            max={9999999999}
+            value={zipCode}
+            setValue={setZipCode}
+            format={zipCodeFormatter}
+            min={501}
+            max={99950}
           />
         </Question>
         <Question label="Eye color" splitPercent={70}>

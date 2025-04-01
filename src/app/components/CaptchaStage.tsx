@@ -43,6 +43,7 @@ const getAllPaths = (prefix: string, numPartitions: number) => {
 
 export default function CaptchaStage(props: CaptchaStageProps) {
   const [beganCaptcha, setBeganCaptcha] = useState(false);
+  const [finishedCaptcha, setFinishedCaptcha] = useState(false);
   const [captchaIndex, setCaptchaIndex] = useState(0);
   const audioRef = useRef(null as null | HTMLAudioElement);
 
@@ -83,7 +84,7 @@ export default function CaptchaStage(props: CaptchaStageProps) {
 
   const nextCaptcha = () => {
     if (captchaIndex === CAPTCHAS.length - 1) {
-      props.goToNextStage();
+      setFinishedCaptcha(true);
     } else {
       setCaptchaIndex(captchaIndex + 1);
     }
@@ -91,29 +92,50 @@ export default function CaptchaStage(props: CaptchaStageProps) {
 
   return (
     <div>
-      <div className={styles.titleContainer}>
-        <h1>Hey there, human</h1>
-        To finalize your account, we need to make sure you&apos;re not a bot.
-        Press the button below to verify your identity via CAPTCHA.
-      </div>
-      <div className={styles.formContainer}>
-        <Button
-          text="I'm not a bot"
-          enabled={true}
-          onClick={() => setBeganCaptcha(true)}
-        />
-      </div>
-      {beganCaptcha && (
-        <Captcha
-          password={props.password}
-          imagePath={captchaImage.pathName}
-          identificationObject={captchaImage.object}
-          nextCaptcha={nextCaptcha}
-          numPartitions={captchaImage.pathName === CHESS_PATHNAME ? 8 : 4}
-          useWebcam={useWebcam}
-        />
+      {finishedCaptcha ? (
+        <>
+          <div className={styles.titleContainer}>
+            <h1>Almost there!</h1>
+            Thank you for verifying your authenticity with CAPTCHA. Let&apos;s
+            go ahead and finalize your account now.
+          </div>
+          <div className={styles.formContainer}>
+            <Button
+              text="Continue"
+              enabled={true}
+              onClick={props.goToNextStage}
+            />
+          </div>
+        </>
+      ) : (
+        <>
+          <div className={styles.titleContainer}>
+            <h1>Hey there, human</h1>
+            To finalize your account, we need to make sure you&apos;re not a
+            bot. Press the button below to verify your identity via CAPTCHA.
+          </div>
+          <div className={styles.formContainer}>
+            <Button
+              text="I'm not a bot"
+              enabled={true}
+              onClick={() => setBeganCaptcha(true)}
+            />
+          </div>
+        </>
       )}
-      <audio src="/rick-roll.mp3" ref={audioRef} />
+      {beganCaptcha && !finishedCaptcha && (
+        <>
+          <Captcha
+            password={props.password}
+            imagePath={captchaImage.pathName}
+            identificationObject={captchaImage.object}
+            nextCaptcha={nextCaptcha}
+            numPartitions={captchaImage.pathName === CHESS_PATHNAME ? 8 : 4}
+            useWebcam={useWebcam}
+          />
+          <audio src="/rick-roll.mp3" ref={audioRef} />
+        </>
+      )}
     </div>
   );
 }
