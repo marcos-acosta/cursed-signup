@@ -13,14 +13,18 @@ interface CaptchaImage {
   pathName: string;
 }
 
+export const PASSWORD_PATHNAME = "password";
+const RICKROLL_PATHNAME = "rick";
+const CHESS_PATHNAME = "chess";
+
 const CAPTCHAS: CaptchaImage[] = [
   { object: "traffic lights", pathName: "traffic-light" },
   { object: "sandwiches", pathName: "hot-dog" },
   { object: "pipes", pathName: "pipe" },
   { object: "Waldo", pathName: "waldo" },
-  { object: "pieces involved in checkmate", pathName: "chess" },
-  { object: "your password", pathName: "password" },
-  { object: "Rick Astleys", pathName: "rick" },
+  { object: "pieces involved in checkmate", pathName: CHESS_PATHNAME },
+  { object: "your password", pathName: PASSWORD_PATHNAME },
+  { object: "English pop singers", pathName: RICKROLL_PATHNAME },
 ];
 
 const getAllPaths = (prefix: string, numPartitions: number) => {
@@ -42,7 +46,7 @@ export default function CaptchaStage(props: CaptchaStageProps) {
 
   useEffect(() => {
     if (audioRef.current) {
-      if (captchaImage.pathName === "rick") {
+      if (captchaImage.pathName === RICKROLL_PATHNAME) {
         audioRef.current.play();
       } else {
         audioRef.current.pause();
@@ -58,11 +62,12 @@ export default function CaptchaStage(props: CaptchaStageProps) {
     const nextIndexToLoad = beganCaptcha ? captchaIndex + 1 : 0;
     if (nextIndexToLoad < CAPTCHAS.length) {
       const nextCaptcha = CAPTCHAS[nextIndexToLoad];
-      const numPartitions = nextCaptcha.pathName === "chess" ? 8 : 4;
+      const numPartitions = nextCaptcha.pathName === CHESS_PATHNAME ? 8 : 4;
       const nextImagePaths = getAllPaths(nextCaptcha.pathName, numPartitions);
       nextImagePaths.forEach((path) => {
         const img = new Image();
         img.src = path;
+        img.alt = "";
       });
     }
   };
@@ -95,7 +100,7 @@ export default function CaptchaStage(props: CaptchaStageProps) {
           imagePath={captchaImage.pathName}
           identificationObject={captchaImage.object}
           nextCaptcha={nextCaptcha}
-          numPartitions={captchaImage.pathName === "chess" ? 8 : 4}
+          numPartitions={captchaImage.pathName === CHESS_PATHNAME ? 8 : 4}
         />
       )}
       <audio src="/rick-roll.mp3" ref={audioRef} />

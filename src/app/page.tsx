@@ -33,7 +33,7 @@ const INITIAL_PASSWORD =
   STARTING_PAGE === PROD_STARTING_STAGE ? PROD_INITIAL_PASSWORD : DEV_PASSWORD;
 
 const MIN_SECONDS_BETWEEN_STILL_THERES = 20;
-const RANDOM_SECONDS = 20;
+const RANDOM_SECONDS = 15;
 
 export default function Home() {
   const [signupStage, setSignupStage] = useState(STARTING_PAGE);

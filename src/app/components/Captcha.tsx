@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import CaptchaPartition from "./CaptchaPartition";
 import styles from "./styles.module.css";
+import { PASSWORD_PATHNAME } from "./CaptchaStage";
 
 interface CaptchaProps {
   password: string;
@@ -48,7 +49,7 @@ export default function Captcha(props: CaptchaProps) {
           key={`${i}-${j}`}
           select={getSelectPartitionFn(i, j, isPartitionSelected)}
           password={
-            i == 3 && j == 3 && props.imagePath === "password"
+            i == 3 && j == 3 && props.imagePath === PASSWORD_PATHNAME
               ? props.password
               : undefined
           }
@@ -58,7 +59,7 @@ export default function Captcha(props: CaptchaProps) {
   }
 
   const isValidPassword =
-    props.imagePath !== "password" ||
+    props.imagePath !== PASSWORD_PATHNAME ||
     (selectedPartitions.length === 1 &&
       partitionsEqual(3, 3, selectedPartitions[0]));
   const showInvalidPassword = !isValidPassword && selectedPartitions.length > 0;
