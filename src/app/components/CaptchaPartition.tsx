@@ -6,10 +6,40 @@ interface CaptchaPartitionProps {
   selected: boolean;
   select: () => void;
   password?: string;
+  isHollow?: boolean;
 }
 
 export default function CaptchaPartition(props: CaptchaPartitionProps) {
-  return (
+  const maybeSelectedCheck = props.selected && (
+    <div
+      className={combineClasses(
+        styles.checkbox,
+        props.isHollow && styles.webcamCheckbox
+      )}
+    >
+      <span
+        className={combineClasses(
+          "material-symbols-outlined",
+          styles.checkIcon
+        )}
+      >
+        check
+      </span>
+    </div>
+  );
+
+  return props.isHollow ? (
+    <div
+      className={combineClasses(
+        styles.hollowClickablePartition,
+        props.selected && styles.selected
+      )}
+      onClick={props.select}
+      role="button"
+    >
+      {maybeSelectedCheck}
+    </div>
+  ) : (
     <div
       className={styles.clickablePartition}
       onClick={props.select}
@@ -21,18 +51,7 @@ export default function CaptchaPartition(props: CaptchaPartitionProps) {
           props.selected && styles.selected
         )}
       >
-        {props.selected && (
-          <div className={styles.checkbox}>
-            <span
-              className={combineClasses(
-                "material-symbols-outlined",
-                styles.checkIcon
-              )}
-            >
-              check
-            </span>
-          </div>
-        )}
+        {maybeSelectedCheck}
         {props.password ? (
           <div className={styles.passwordContainer}>
             <div className={styles.passwordInnerContainer}>

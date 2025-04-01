@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import CaptchaPartition from "./CaptchaPartition";
 import styles from "./styles.module.css";
 import { PASSWORD_PATHNAME } from "./CaptchaStage";
+import Webcam from "react-webcam";
 
 interface CaptchaProps {
   password: string;
@@ -9,6 +10,7 @@ interface CaptchaProps {
   identificationObject: string;
   nextCaptcha: () => void;
   numPartitions?: number;
+  useWebcam?: boolean;
 }
 
 export default function Captcha(props: CaptchaProps) {
@@ -53,6 +55,7 @@ export default function Captcha(props: CaptchaProps) {
               ? props.password
               : undefined
           }
+          isHollow={props.useWebcam}
         />
       );
     }
@@ -85,9 +88,20 @@ export default function Captcha(props: CaptchaProps) {
             {props.identificationObject}
           </div>
         </div>
-        <div className={styles.captchaGrid} style={gridStyle}>
-          {...partitions}
-        </div>
+        {props.useWebcam ? (
+          <div className={styles.webcamContainer}>
+            <Webcam
+              className={styles.webcam}
+              mirrored={true}
+              onUserMediaError={props.nextCaptcha}
+            />
+            <div className={styles.webcamOverlayGrid}>{...partitions}</div>
+          </div>
+        ) : (
+          <div className={styles.captchaGrid} style={gridStyle}>
+            {...partitions}
+          </div>
+        )}
         {showInvalidPassword && (
           <div className={styles.captchaError}>Passwords do not match</div>
         )}

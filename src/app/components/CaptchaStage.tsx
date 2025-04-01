@@ -16,6 +16,9 @@ interface CaptchaImage {
 export const PASSWORD_PATHNAME = "password";
 const RICKROLL_PATHNAME = "rick";
 const CHESS_PATHNAME = "chess";
+const SELF_PATHNAME = "self";
+
+const CUTIE_OR_LOSER = Math.random() > 0.5 ? "cuties" : "losers";
 
 const CAPTCHAS: CaptchaImage[] = [
   { object: "traffic lights", pathName: "traffic-light" },
@@ -24,6 +27,7 @@ const CAPTCHAS: CaptchaImage[] = [
   { object: "Waldo", pathName: "waldo" },
   { object: "pieces involved in checkmate", pathName: CHESS_PATHNAME },
   { object: "your password", pathName: PASSWORD_PATHNAME },
+  { object: CUTIE_OR_LOSER, pathName: SELF_PATHNAME },
   { object: "English pop singers", pathName: RICKROLL_PATHNAME },
 ];
 
@@ -43,6 +47,7 @@ export default function CaptchaStage(props: CaptchaStageProps) {
   const audioRef = useRef(null as null | HTMLAudioElement);
 
   const captchaImage = CAPTCHAS[captchaIndex];
+  const useWebcam = captchaImage.pathName === SELF_PATHNAME;
 
   useEffect(() => {
     if (audioRef.current) {
@@ -62,6 +67,10 @@ export default function CaptchaStage(props: CaptchaStageProps) {
     const nextIndexToLoad = beganCaptcha ? captchaIndex + 1 : 0;
     if (nextIndexToLoad < CAPTCHAS.length) {
       const nextCaptcha = CAPTCHAS[nextIndexToLoad];
+      // Won't be able to pre-fetch images for the webcam stage.
+      if (nextCaptcha.pathName === SELF_PATHNAME) {
+        return;
+      }
       const numPartitions = nextCaptcha.pathName === CHESS_PATHNAME ? 8 : 4;
       const nextImagePaths = getAllPaths(nextCaptcha.pathName, numPartitions);
       nextImagePaths.forEach((path) => {
@@ -101,6 +110,7 @@ export default function CaptchaStage(props: CaptchaStageProps) {
           identificationObject={captchaImage.object}
           nextCaptcha={nextCaptcha}
           numPartitions={captchaImage.pathName === CHESS_PATHNAME ? 8 : 4}
+          useWebcam={useWebcam}
         />
       )}
       <audio src="/rick-roll.mp3" ref={audioRef} />
