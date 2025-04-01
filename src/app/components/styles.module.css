@@ -8,6 +8,9 @@
   width: 100vw;
   height: 100vh;
   background-color: var(--background);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .header {
@@ -30,7 +33,7 @@
 }
 
 .bodyOuterContainer {
-  width: 100%;
+  width: min(100%, 600px);
   margin-top: 10px;
   display: flex;
   flex-direction: row;
@@ -129,6 +132,9 @@
   border: 1px dashed var(--foreground);
   border-radius: 0;
   padding: 8px;
+  height: 42px;
+  -webkit-appearance: none;
+  appearance: none;
 }
 
 .dropdown:focus {
@@ -158,14 +164,14 @@
 }
 
 .captchaInnerContainer {
-  width: 95vw;
+  width: min(95vw, 500px);
   background-color: var(--background);
   padding: 15px;
 }
 
 .captchaGrid {
-  width: calc(95vw - 30px);
-  height: calc(95vw - 30px);
+  width: calc(min(95vw, 500px) - 30px);
+  height: calc(min(95vw, 500px) - 30px);
   display: grid;
   gap: 0;
 }
@@ -218,8 +224,8 @@
 }
 
 .checkbox {
-  width: 6vw;
-  height: 6vw;
+  width: 30%;
+  height: 30%;
   background-color: var(--blue);
   border-radius: 50%;
   display: block;
@@ -239,7 +245,7 @@
 }
 
 .checkIcon {
-  font-size: 6vw;
+  font-size: min(5vw, 20px);
 }
 
 .promptContainer {
@@ -303,7 +309,7 @@
 }
 
 .stillThereTextContainer {
-  width: 80%;
+  width: min(80%, 400px);
   padding: 10px;
   padding-top: 15px;
   background-color: var(--background);
@@ -354,8 +360,8 @@
 }
 
 .webcamContainer {
-  width: calc(95vw - 30px);
-  height: calc(95vw - 30px);
+  width: calc(min(95vw, 500px) - 30px);
+  height: calc(min(95vw, 500px) - 30px);
   background-color: var(--foreground);
   overflow: hidden;
   display: flex;
@@ -393,7 +399,7 @@
 }
 
 .hollowClickablePartition.selected {
-  border: calc((95vw - 30px) / 40) solid var(--background);
+  border: calc((min(95vw, 500px) - 30px) / 40) solid var(--background);
 }
 
 .phoneNumberDisplay {

@@ -30,7 +30,7 @@ export default function ConfirmNumber(props: ConfirmNumberProps) {
 
   const acceptableDiff =
     paused && areaCode
-      ? paddedAreaCode === trueNumberString.slice(0, 3)
+      ? Math.abs(areaCode - parseInt(trueNumberString.slice(0, 3))) <= 5
       : undefined;
 
   const incrementNumber = () => {
@@ -87,7 +87,7 @@ export default function ConfirmNumber(props: ConfirmNumberProps) {
             )}
           >
             {acceptableDiff
-              ? "Phone numbers are within the same area code."
+              ? "Phone number area codes are close enough."
               : "Phone numbers are not close enough."}
           </div>
         )}
