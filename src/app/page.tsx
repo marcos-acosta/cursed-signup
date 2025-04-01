@@ -9,6 +9,7 @@ import SecurityQuestions from "./components/SecurityQuestions";
 import CaptchaStage from "./components/CaptchaStage";
 import StillThere from "./components/StillThere";
 import SignedOut from "./components/SignedOut";
+import PhoneNumberInput from "./components/PhoneNumberInput";
 
 const enum SignupStage {
   BASIC_INFO = 1,
@@ -16,9 +17,10 @@ const enum SignupStage {
   ABOUT_YOU = 3,
   SECURITY_QUESTIONS = 4,
   CAPTCHA = 5,
+  PHONE_NUMBER_INPUT = 6,
 }
 
-const DEV_STARTING_STAGE = SignupStage.CAPTCHA;
+const DEV_STARTING_STAGE = SignupStage.PHONE_NUMBER_INPUT;
 const DEV_PASSWORD = "password123";
 
 const PROD_STARTING_STAGE = SignupStage.BASIC_INFO;
@@ -83,6 +85,8 @@ export default function Home() {
       <SecurityQuestions goToNextStage={nextSignupStage} password={password} />
     ) : signupStage === SignupStage.CAPTCHA ? (
       <CaptchaStage goToNextStage={nextSignupStage} password={password} />
+    ) : signupStage === SignupStage.PHONE_NUMBER_INPUT ? (
+      <PhoneNumberInput goToNextStage={nextSignupStage} />
     ) : (
       <></>
     );
