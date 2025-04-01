@@ -2,9 +2,7 @@ import { SignupStageProps } from "../interfaces";
 import Button from "./Button";
 import styles from "./styles.module.css";
 
-interface SecurityBreachProps extends SignupStageProps {}
-
-export default function SecurityBreach(props: SecurityBreachProps) {
+export default function SecurityBreach(props: SignupStageProps) {
   return (
     <div>
       <div className={styles.titleContainer}>

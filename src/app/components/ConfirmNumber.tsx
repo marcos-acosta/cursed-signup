@@ -62,8 +62,8 @@ export default function ConfirmNumber(props: ConfirmNumberProps) {
     <div>
       <div className={styles.titleContainer}>
         <h1>Confirm your phone number</h1>
-        Press the button labeled "Start" and press it again to stop as soon as
-        you see your number appear.
+        Press the button labeled &quot;Start&quot; and press it again to stop as
+        soon as you see your number appear.
       </div>
       <div className={styles.formContainer}>
         <div
