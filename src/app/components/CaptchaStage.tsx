@@ -25,7 +25,7 @@ const CAPTCHAS: CaptchaImage[] = [
   { object: "sandwiches", pathName: "hot-dog" },
   { object: "pipes", pathName: "pipe" },
   { object: "Waldo", pathName: "waldo" },
-  { object: "pieces involved in checkmate", pathName: CHESS_PATHNAME },
+  { object: "passed pawns", pathName: CHESS_PATHNAME },
   { object: "your password", pathName: PASSWORD_PATHNAME },
   { object: CUTIE_OR_LOSER, pathName: SELF_PATHNAME },
   { object: "English pop singers", pathName: RICKROLL_PATHNAME },
