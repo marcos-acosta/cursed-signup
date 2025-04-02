@@ -149,7 +149,7 @@ export default function PhoneNumberInput(props: PhoneNumberInputProps) {
               value={confirmNumber}
               updateValue={setConfirmNumber}
               error={showConfirmNumberError}
-              type="number"
+              type="tel"
             />
           </Question>
         )}

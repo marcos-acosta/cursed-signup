@@ -54,7 +54,8 @@ export const doesTimeMatchCurrentTime = (time: string) => {
   }
   const now = new Date();
   return (
-    now.getHours() === givenTimeObject.getHours() &&
+    (now.getHours() === givenTimeObject.getHours() ||
+      now.getHours() === givenTimeObject.getHours() + 12) &&
     now.getMinutes() === givenTimeObject.getMinutes()
   );
 };

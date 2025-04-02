@@ -8,7 +8,7 @@ export interface InputProps {
   placeholder?: string;
   updateValue: (s: string) => void;
   error?: boolean;
-  type?: "password" | "email" | "number";
+  type?: "password" | "email" | "number" | "tel";
   onBlur?: () => void;
 }
 
