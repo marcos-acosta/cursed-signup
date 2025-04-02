@@ -5,22 +5,25 @@ import styles from "./styles.module.css";
 import Question from "./Question";
 import Input from "./Input";
 import Button from "./Button";
+import { doesTimeMatchCurrentTime, isValidInt, isValidTime } from "../util";
 
 interface SecurityQuestionsProps extends SignupStageProps {
   password: string;
 }
 
 const PASSWORD_QUESTION = "What is your password?";
+const TIME_QUESTION = "What time is it right now?";
+const FRIENDS_QUESTION = "How many friends do you have?";
 
 const SECURITY_QUESTIONS = [
-  "What time is it right now?",
+  TIME_QUESTION,
   "Who was the first female U.S. Senator?",
   PASSWORD_QUESTION,
   "When will you tell them the truth?",
   "What was the model of your first private jet?",
   "What is something you constantly forget?",
   "What is the first letter on your keyboard?",
-  "How many friends do you have?",
+  FRIENDS_QUESTION,
   "What is the name of your favorite armadillo?",
 ];
 
@@ -32,28 +35,51 @@ export default function SecurityQuestions(props: SecurityQuestionsProps) {
   const [question3, setQuestion3] = useState(null as string | null);
   const [answer3, setAnswer3] = useState("");
 
-  const checkPasswordOrUndefined = (
-    question: string | null,
-    answer: string
-  ) => {
-    return question === PASSWORD_QUESTION &&
-      answer.length > 0 &&
-      answer !== props.password
+  const checkPasswordOrUndefined = (question: string, answer: string) => {
+    return question === PASSWORD_QUESTION && answer !== props.password
       ? "Passwords do not match"
+      : undefined;
+  };
+
+  const checkTimeFormat = (question: string, answer: string) => {
+    return question === TIME_QUESTION
+      ? !isValidTime(answer)
+        ? "Not a valid time"
+        : !doesTimeMatchCurrentTime(answer)
+        ? "Time does not match"
+        : undefined
+      : undefined;
+  };
+
+  const checkIntFormat = (question: string, answer: string) => {
+    return question === FRIENDS_QUESTION
+      ? !isValidInt(answer)
+        ? "Must be a number"
+        : parseInt(answer) > 100
+        ? "That seems unlikely"
+        : undefined
+      : undefined;
+  };
+
+  const checkAnswer = (question: string | null, answer: string) => {
+    return question && answer.length > 0
+      ? checkPasswordOrUndefined(question, answer) ||
+          checkTimeFormat(question, answer) ||
+          checkIntFormat(question, answer)
       : undefined;
   };
 
   const question1Error =
     answer1.length > 0 && question1 === null
       ? "You must select a question to answer"
-      : checkPasswordOrUndefined(question1, answer1);
+      : checkAnswer(question1, answer1);
 
   const question2Error =
     answer2.length > 0 && question2 === null
       ? "You must select a question to answer"
       : question1 === question2 && question2 !== null
       ? "Must choose different questions"
-      : checkPasswordOrUndefined(question2, answer2);
+      : checkAnswer(question2, answer2);
 
   const question3Error =
     answer3.length > 0 && question3 === null
@@ -61,7 +87,7 @@ export default function SecurityQuestions(props: SecurityQuestionsProps) {
       : (question1 === question3 || question2 === question3) &&
         question3 !== null
       ? "Must choose different questions"
-      : checkPasswordOrUndefined(question3, answer3);
+      : checkAnswer(question3, answer3);
 
   const question1IsValid = Boolean(question1) && answer1.length > 0;
   const question2IsValid =

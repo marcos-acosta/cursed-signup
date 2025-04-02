@@ -26,7 +26,7 @@ const enum SignupStage {
   SECURITY_BREACHED = 9,
 }
 
-const DEV_STARTING_STAGE = SignupStage.CAPTCHA;
+const DEV_STARTING_STAGE = SignupStage.SECURITY_QUESTIONS;
 const DEV_PASSWORD = "password123";
 const DEV_PHONE_NUMBER = "5000000000";
 
