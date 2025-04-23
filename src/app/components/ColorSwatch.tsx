@@ -7,9 +7,15 @@ export interface ColorSwatchProps {
 
 export default function ColorSwatch(props: ColorSwatchProps) {
   return (
-    <div
-      className={styles.colorSwatch}
-      style={{ backgroundColor: props.color || "#171717" }}
-    ></div>
+    <div className={styles.colorSwatchContainer}>
+      <div className={styles.eye}>
+        <div
+          className={styles.iris}
+          style={{ backgroundColor: props.color || "#171717" }}
+        >
+          <div className={styles.pupil}></div>
+        </div>
+      </div>
+    </div>
   );
 }

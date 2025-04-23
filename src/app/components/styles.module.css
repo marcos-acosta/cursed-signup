@@ -109,11 +109,39 @@
   gap: 5px;
 }
 
-.colorSwatch {
+.colorSwatchContainer {
   width: 100%;
   height: 100%;
   display: flex;
+  justify-content: center;
+  align-items: center;
+  /* border: 1px solid var(--foreground); */
+}
+
+.eye {
+  width: 60%;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
   border: 1px solid var(--foreground);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.iris {
+  width: 50%;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pupil {
+  width: 50%;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  background-color: black;
 }
 
 .dropdownContainer {
